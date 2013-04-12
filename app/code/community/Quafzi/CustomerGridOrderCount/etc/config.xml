@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Quafzi_CustomerGridOrderCount>
+            <version>0.1.0</version>
+        </Quafzi_CustomerGridOrderCount>
+    </modules>
+    <global>
+        <blocks>
+            <quafzi_customergridordercount>
+                <class>Quafzi_CustomerGridOrderCount_Block</class>
+            </quafzi_customergridordercount>
+            <adminhtml>
+                <rewrite>
+                    <customer_grid>Quafzi_CustomerGridOrderCount_Block_Adminhtml_Customer_Grid</customer_grid>
+                </rewrite>
+            </adminhtml>
+        </blocks>
+    </global>
+</config>
