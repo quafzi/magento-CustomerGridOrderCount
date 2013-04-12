@@ -17,4 +17,15 @@
             </adminhtml>
         </blocks>
     </global>
+    <adminhtml>
+        <translate>
+            <modules>
+                <Quafzi_CustomerGridOrderCount>
+                    <files>
+                        <default>Quafzi_CustomerGridOrderCount.csv</default>
+                    </files>
+                </Quafzi_CustomerGridOrderCount>
+            </modules>
+        </translate>
+    </adminhtml>
 </config>

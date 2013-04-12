@@ -1,2 +1,3 @@
 app/code/community/Quafzi/CustomerGridOrderCount app/code/community/Quafzi/CustomerGridOrderCount
 app/etc/modules/Quafzi_CustomerGridOrderCount.xml app/etc/modules/Quafzi_CustomerGridOrderCount.xml
+app/locale/de_DE/Quafzi_CustomerGridOrderCount.csv app/locale/de_DE/Quafzi_CustomerGridOrderCount.csv
