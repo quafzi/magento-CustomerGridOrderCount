@@ -6,16 +6,11 @@
         </Quafzi_CustomerGridOrderCount>
     </modules>
     <global>
-        <blocks>
+        <models>
             <quafzi_customergridordercount>
-                <class>Quafzi_CustomerGridOrderCount_Block</class>
+                <class>Quafzi_CustomerGridOrderCount_Model</class>
             </quafzi_customergridordercount>
-            <adminhtml>
-                <rewrite>
-                    <customer_grid>Quafzi_CustomerGridOrderCount_Block_Adminhtml_Customer_Grid</customer_grid>
-                </rewrite>
-            </adminhtml>
-        </blocks>
+        </models>
     </global>
     <adminhtml>
         <translate>
@@ -27,5 +22,23 @@
                 </Quafzi_CustomerGridOrderCount>
             </modules>
         </translate>
+        <events>
+            <adminhtml_block_html_before>
+                <observers>
+                    <quafzi_customergridordercount_adminhtml_block_html_before>
+                        <class>quafzi_customergridordercount/observer</class>
+                        <method>beforeBlockToHtml</method>
+                    </quafzi_customergridordercount_adminhtml_block_html_before>
+                </observers>
+            </adminhtml_block_html_before>
+            <eav_collection_abstract_load_before>
+                <observers>
+                    <quafzi_customergridordercount_change_collection>
+                        <class>quafzi_customergridordercount/observer</class>
+                        <method>beforeCustomerCollectionLoad</method>
+                    </quafzi_customergridordercount_change_collection>
+                </observers>
+            </eav_collection_abstract_load_before>
+        </events>
     </adminhtml>
 </config>
