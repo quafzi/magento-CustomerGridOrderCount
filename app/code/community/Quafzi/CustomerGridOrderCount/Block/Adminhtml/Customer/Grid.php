@@ -33,13 +33,7 @@ class Quafzi_CustomerGridOrderCount_Block_Adminhtml_Customer_Grid
             ->getTableName('sales/order');
         $collection
             ->getSelect()
-            ->joinLeft(
-                array('orders' => $orderTableName),
-                'orders.customer_id=e.entity_id',
-                array('order_count' => 'COUNT(customer_id)')
-            );
-        $collection
-            ->groupByAttribute('entity_id');
+            ->columns('(SELECT count(1) FROM `sales_flat_order` WHERE customer_id=e.entity_id) order_count');
         parent::setCollection($collection);
         return $this;
     }
