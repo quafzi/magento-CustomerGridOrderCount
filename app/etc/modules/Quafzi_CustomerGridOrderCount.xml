@@ -11,6 +11,9 @@
         <Quafzi_CustomerGridOrderCount>
             <active>true</active>
             <codePool>community</codePool>
+            <depends>
+                <Quafzi_CustomerTypes />
+            </depends>
         </Quafzi_CustomerGridOrderCount>
     </modules>
 </config>
