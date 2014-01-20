@@ -1,0 +1,15 @@
+{
+    "name": "quafzi/customer-grid-order-count",
+    "type": "magento-module",
+    "description": "This extension adds a column \"order count\" to your Magento customer grid.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Thomas Birke",
+            "email": "tbirke@netextreme.de"
+        }
+    ],
+    "require": {
+        "magento-hackathon/magento-composer-installer": "*"
+    }
+}
