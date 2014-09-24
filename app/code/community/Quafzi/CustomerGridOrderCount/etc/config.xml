@@ -23,14 +23,14 @@
             </modules>
         </translate>
         <events>
-            <adminhtml_block_html_before>
+            <core_layout_block_create_after>
                 <observers>
                     <quafzi_customergridordercount_adminhtml_block_html_before>
                         <class>quafzi_customergridordercount/observer</class>
                         <method>beforeBlockToHtml</method>
                     </quafzi_customergridordercount_adminhtml_block_html_before>
                 </observers>
-            </adminhtml_block_html_before>
+            </core_layout_block_create_after>
             <eav_collection_abstract_load_before>
                 <observers>
                     <quafzi_customergridordercount_change_collection>
