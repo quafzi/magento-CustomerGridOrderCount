@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Quafzi_CustomerGridOrderCount>
-            <version>0.2.0</version>
+            <version>0.2.1</version>
         </Quafzi_CustomerGridOrderCount>
     </modules>
     <global>
