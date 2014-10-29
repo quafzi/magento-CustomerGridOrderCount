@@ -60,8 +60,8 @@ class Quafzi_CustomerGridOrderCount_Model_Observer
             $collection
                 ->getSelect()
                 ->joinLeft(
-                    array('orders' => $orderTableName),
-                    'orders.customer_id=e.entity_id',
+                    array('orders_to_count' => $orderTableName),
+                    'orders_to_count.customer_id=e.entity_id',
                     array('order_count' => 'COUNT(customer_id)')
                 );
             $collection->groupByAttribute('entity_id');
