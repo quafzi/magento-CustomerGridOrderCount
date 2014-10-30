@@ -57,20 +57,19 @@ class Quafzi_CustomerGridOrderCount_Model_Observer
             try {
                 $collection->getSelect()->getPart($relationAlias);
             } catch (Zend_Db_Select_Exception $e) {
-                // alread joined
-                return;
-            }
-            $orderTableName = Mage::getSingleton('core/resource')
-                ->getTableName('sales/order');
+                // not yet joined
+                $orderTableName = Mage::getSingleton('core/resource')
+                    ->getTableName('sales/order');
 
-            $collection
-                ->getSelect()
-                ->joinLeft(
-                    array($relationAlias => $orderTableName),
-                    $relationAlias . '.customer_id=e.entity_id',
-                    array('order_count' => 'COUNT(customer_id)')
-                );
-            $collection->groupByAttribute('entity_id');
+                $collection
+                    ->getSelect()
+                    ->joinLeft(
+                        array($relationAlias => $orderTableName),
+                        $relationAlias . '.customer_id=e.entity_id',
+                        array('order_count' => 'COUNT(customer_id)')
+                    );
+                $collection->groupByAttribute('entity_id');
+            }
         }
     }
 }
