@@ -52,16 +52,22 @@ class Quafzi_CustomerGridOrderCount_Model_Observer
     public function beforeCustomerCollectionLoad(Varien_Event_Observer $observer)
     {
         $collection = $observer->getEvent()->getCollection();
-        Mage::log(get_class($collection));
         if ($collection instanceof Mage_Customer_Model_Resource_Customer_Collection) {
+            $relationAlias = 'orders_to_count';
+            try {
+                $collection->getSelect()->getPart($relationAlias);
+            } catch (Zend_Db_Select_Exception $e) {
+                // alread joined
+                return;
+            }
             $orderTableName = Mage::getSingleton('core/resource')
                 ->getTableName('sales/order');
 
             $collection
                 ->getSelect()
                 ->joinLeft(
-                    array('orders_to_count' => $orderTableName),
-                    'orders_to_count.customer_id=e.entity_id',
+                    array($relationAlias => $orderTableName),
+                    $relationAlias . '.customer_id=e.entity_id',
                     array('order_count' => 'COUNT(customer_id)')
                 );
             $collection->groupByAttribute('entity_id');
