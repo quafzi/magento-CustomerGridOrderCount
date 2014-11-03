@@ -54,9 +54,9 @@ class Quafzi_CustomerGridOrderCount_Model_Observer
         $collection = $observer->getEvent()->getCollection();
         if ($collection instanceof Mage_Customer_Model_Resource_Customer_Collection) {
             $relationAlias = 'orders_to_count';
-            try {
-                $collection->getSelect()->getPart($relationAlias);
-            } catch (Zend_Db_Select_Exception $e) {
+
+            $from = $collection->getSelect()->getPart(Zend_Db_Select::FROM);
+            if (false === array_key_exists($relationAlias, $from)) {
                 // not yet joined
                 $orderTableName = Mage::getSingleton('core/resource')
                     ->getTableName('sales/order');
