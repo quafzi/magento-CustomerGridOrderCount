@@ -66,7 +66,7 @@ class Quafzi_CustomerGridOrderCount_Model_Observer
                     ->joinLeft(
                         array($relationAlias => $orderTableName),
                         $relationAlias . '.customer_id=e.entity_id',
-                        array('order_count' => 'COUNT(customer_id)')
+                        array('order_count' => 'COUNT(' . $relationAlias . '.customer_id)')
                     );
                 $collection->groupByAttribute('entity_id');
             }
