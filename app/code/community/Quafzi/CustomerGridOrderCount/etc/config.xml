@@ -35,10 +35,18 @@
                 <observers>
                     <quafzi_customergridordercount_change_collection>
                         <class>quafzi_customergridordercount/observer</class>
-                        <method>beforeCustomerCollectionLoad</method>
+                        <method>beforeCollectionLoad</method>
                     </quafzi_customergridordercount_change_collection>
                 </observers>
             </eav_collection_abstract_load_before>
+            <core_collection_abstract_load_before>
+                <observers>
+                    <quafzi_customergridordercount_change_collection>
+                        <class>quafzi_customergridordercount/observer</class>
+                        <method>beforeCollectionLoad</method>
+                    </quafzi_customergridordercount_change_collection>
+                </observers>
+            </core_collection_abstract_load_before>
         </events>
     </adminhtml>
 </config>
