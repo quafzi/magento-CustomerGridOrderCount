@@ -56,14 +56,35 @@ class Quafzi_CustomerGridOrderCount_Model_Observer
     public function beforeCollectionLoad($observer)
     {
         $collection = $observer->getEvent()->getCollection();
-        if ($collection instanceof Mage_Customer_Model_Resource_Customer_Collection
-            || $collection instanceof Mage_Sales_Model_Resource_Order_Grid_Collection
-        ) {
+        if ($collection instanceof Mage_Customer_Model_Resource_Customer_Collection) {
             $relationAlias = 'orders_to_count';
             $from = $collection->getSelect()->getPart(Zend_Db_Select::FROM);
             if (false === array_key_exists($relationAlias, $from)) {
                 $this->_joinOrderCount($collection, $relationAlias);
             }
+        }
+        if ($collection instanceof Mage_Sales_Model_Resource_Order_Grid_Collection) {
+            /* WTF? It's not that easy to join the count on the same table using Zend_Db */
+            // create subquery
+            $orderTable = Mage::getResourceModel('sales/order_collection');
+            $orderTable->getSelect()->reset(Zend_Db_Select::COLUMNS);
+            $orderTable
+                 ->addExpressionFieldToSelect('order_count', 'COUNT(1)', 'order_count')
+                 ->getSelect()->where('sub_table.customer_id = main_table.customer_id')
+                 ;
+
+            // change table alias, otherwise we would get "main_table" for both main and sub query
+            $from = $orderTable->getSelect()->getPart(Zend_Db_Select::FROM);
+            $from['sub_table'] = $from['main_table'];
+            unset($from['main_table']);
+            $from = $orderTable->getSelect()->setPart(Zend_Db_Select::FROM, $from);
+
+            // add sub query
+            $collection->addExpressionFieldToSelect(
+                'order_count',
+                new Zend_Db_Expr('(' . $orderTable->getSelect() . ') as order_count'),
+                'order_count'
+            );
         }
     }
 
